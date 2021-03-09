@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object",
+  "required": [
+    "firstname",
+    "lastname",
+    "email",
+    "phone",
+    "dob",
+    "provider",
+    "certify"
+  ],
+  "properties": {
+    "manufacturer": {
+      "type": "string",
+      "enum": ["Any", "Janssen", "Moderna", "Pfizer"]
+    },
+    "firstname": {
+      "type": "string",
+      "maxLength": 64
+    },
+    "lastname": {
+      "type": "string",
+      "maxLength": 64
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "phone": {
+      "type": "string",
+      "pattern": "^[0-9]{3}-[0-9]{3}-[0-9]{4}$"
+    },
+    "birthdate": {
+      "type": "string",
+      "pattern": "^[0-9]{2}/[0-9]{2}/[0-9]{4}$"
+    },
+    "peoplesoft": {
+      "type": "string",
+      "maxLength": 64
+    },
+    "insurance": {
+      "type": "boolean",
+      "maxLength": 64
+    },
+    "provider": {
+      "type": "string",
+      "maxLength": 64
+    },
+    "providerid": {
+      "type": "string",
+      "maxLength": 64
+    },
+    "groupnumber": {
+      "type": "string",
+      "maxLength": 64
+    },
+    "certify": {
+      "type": "string",
+      "enum": ["Phase1B", "Phase1BPlus"]
+    }
+  }
+}
