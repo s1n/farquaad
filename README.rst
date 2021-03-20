@@ -63,25 +63,18 @@ Args
 
 -H home
     Home location that can be identified by OpenMapQuest
-
 -d miles
     Restriction - Distance in miles you are willing to travel.
-
 -P file
     Patient data file. See data/form.schema.json for JSON schema validation.
     Note that this file is not currently validated against the schema.
-
--c city,city,...
-    Restriction - List of cities to restrict your search.
-
--z zip,zip,...
-    Restriction - List of zipcodes to restrict your search.
-
+-c cities
+    Restriction - Comma separated list of cities to restrict your search.
+-z zipcodes
+    Restriction - Comma separated list of zipcodes to restrict your search.
 -v
     Info level verbosity logged
-
 -vv
     Debug level verbosity logged
-
 --version
     Print the current version
