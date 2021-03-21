@@ -57,15 +57,15 @@ class AppointmentForm(Page):
             "combo-date": "//lightning-combobox[2]",
             "items-date": "//lightning-combobox[2]//*//lightning-base-combobox-item",
             "item-date": [
-                "//lightning-combobox[2]//*//lightning-base-combobox-item[10]/span[2]/span"
+                "//lightning-combobox[2]//*//lightning-base-combobox-item[10]/span[2]/span",
             ],
             "combo-time": "//lightning-combobox[3]",
             "items-time": "//lightning-combobox[3]//*//lightning-base-combobox-item",
             "item-time": [
-                "//lightning-combobox[3]//*//lightning-base-combobox-item[1]/span[2]/span"
+                "//lightning-combobox[3]//*//lightning-base-combobox-item[1]/span[2]/span",
             ],
             "button-continue": "//lightning-button/button",
-            "sucka": "//*[contains(text(), 'There are no available time slots.')]"
+            "sucka": "//*[contains(text(), 'There are no available time slots.')]",
         }
 
     def populate(self, patientData):
@@ -137,7 +137,7 @@ class PatientForm(Page):
             "combo-provider": "//lightning-combobox[1]",
             "item-provider": {
                 "yes": "//lightning-combobox[1]//*//lightning-base-combobox-item[1]/span[2]/span",
-                "no": "//lightning-combobox[1]//*//lightning-base-combobox-item[2]/span[2]/span"
+                "no": "//lightning-combobox[1]//*//lightning-base-combobox-item[2]/span[2]/span",
             },
             "text-provider": "//lightning-input[5]//*//input",
             "text-providerid": "//lightning-input[6]//*//input",
@@ -146,8 +146,8 @@ class PatientForm(Page):
             "item-phase": {
                 "phase1": "//lightning-combobox[2]//*//lightning-base-combobox-item[1]/span[2]/span",
                 "phase1b": "//lightning-combobox[2]//*//lightning-base-combobox-item[2]/span[2]/span",
-                "phase1bplus": "//lightning-combobox[2]//*//lightning-base-combobox-item[3]/span[2]/span"
-                "phase1c": "//lightning-combobox[2]//*//lightning-base-combobox-item[4]/span[2]/span"
+                "phase1bplus": "//lightning-combobox[2]//*//lightning-base-combobox-item[3]/span[2]/span",
+                "phase1c": "//lightning-combobox[2]//*//lightning-base-combobox-item[4]/span[2]/span",
                 #"phase2": "//lightning-combobox[2]//*//lightning-base-combobox-item[5]/span[2]/span"
             },
             "button-schedule": "//lightning-button[2]/button",
