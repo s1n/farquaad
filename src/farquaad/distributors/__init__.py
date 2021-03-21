@@ -18,10 +18,20 @@ class Distributor:
         refine = Filter(home, restrictions)
         while not availability:
             sleep(delay)
-            availability = self.checkAvailability(restrictions)
+            availability = self.checkAvailability()
             availability = refine.apply(availability)
             availability = sorted(availability, key=lambda slot: slot["distance"])
         return availability
+
+    def sanity(self, delay):
+        self._logger.info(f"Sanity checking distributor registration journey: {self._name}")
+        while True:
+            sleep(delay)
+            availability = self.checkAvailability()
+            for appt in availability:
+                if self.verify(appt):
+                    return True
+        return False
     
     def process(self, openSlot, patientData):
         self._logger.info(f"Processing distributor registration journey: {self._name}")

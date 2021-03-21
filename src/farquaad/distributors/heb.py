@@ -34,8 +34,12 @@ class HEB(Distributor):
         # this is just a plain page, nothing to do here
         self.page_confirm.capture("screenshots/heb_appointment_page.png")
         return True
+
+    def verify(self, openSlot):
+        self._logger.info("HEB sanity test")
+        return self.page_appointment.load(openSlot["url"])
     
-    def checkAvailability(self, restrictions):
+    def checkAvailability(self):
         self._logger.info("Checking HEB API for availability")
         locations = json.loads(urlopen(self.statusUrl).read())['locations']
 

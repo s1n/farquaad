@@ -5,6 +5,7 @@ import sys
 
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
+from pyvirtualdisplay import Display
 
 from .distributors.heb import HEB
 from .base import Restrictions
@@ -53,6 +54,12 @@ def parse_args(args):
         help="set loglevel to DEBUG",
         action="store_const",
         const=logging.DEBUG,
+    )
+    parser.add_argument(
+        "--sanity",
+        dest="sanity",
+        help="Perform a sanity test to verify the environment and assumptions",
+        action="store_true"
     )
     parser.add_argument(
         "-c",
@@ -112,18 +119,32 @@ def setup_logging(loglevel):
 def main(args):
     args = parse_args(args)
     setup_logging(args.loglevel)
-    patientData = json.load(args.patientdata)
-    restricted = Restrictions(cities=args.cities, zipcodes=args.zipcodes, distance=args.distance)
     _logger.debug("Initializing the default web driver")
     
     # let's create the driver here so we can reuse it
+    display = Display(visible=0, size=(800, 600))
+    display.start()
     options = Options()
     options.headless = False
     driver = webdriver.Firefox(options=options)
 
     # find a store, grab a slot, cleanup
     henryebutts = heb(driver=driver, logger=_logger)
+
+    if args.sanity:
+        goodToGo = henryebutts.sanity(args.timedelay)
+        if goodToGo:
+            _logger.info("Sanity test complete; environment is good")
+        else:
+            _logger.info("Sanity test complete; environment is not good - check requirements and distributor's website")
+        driver.quit()
+        display.stop()
+        sys.exit(goodToGo ? 1 : 0)
+        
+    patientData = json.load(args.patientdata)
+    restricted = Restrictions(cities=args.cities, zipcodes=args.zipcodes, distance=args.distance)
     appt = None
+
     while not appt:
         possibleSites = henryebutts.monitor(args.home, restricted, args.timedelay)
         print(possibleSites)
@@ -133,6 +154,7 @@ def main(args):
             break
         #if we didn't break out, all of the slots found booked too quick, start over
     henryebutts.finalize()
+    display.stop()
     _logger.info("Auto-registration complete, heck the provided email for the appointment")
 
 def run():
